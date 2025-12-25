@@ -75,15 +75,30 @@ def createSymlink(home_dir,pathList:list) -> None:
         print(f"symlinking {dotpath} -> {src_path}")
         subprocess.run(["ln","-s",dotpath,src_path])
 
-def setUpNormalStuff() -> None:
+def setUpNormalStuff(home_dir) -> None:
     # this will make sure you gtk theme will be applied all over the apps
     subprocess.run(["systemctl","--user","restart","xdg-desktop-portal-hyprland"],check=True)
     subprocess.run(["systemctl","--user","restart","xdg-desktop-portal"],check=True)
     subprocess.run(["gsettings","set","org.gnome.desktop.interface","color-scheme","prefer-dark"])
 
-    subprocess.run(["sh","-c","$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ])
+    zsh_custom = os.environ.get("ZSH_CUSTOM", f"{home_dir}/.oh-my-zsh/custom")
+    p10k = f"{zsh_custom}/themes/powerlevel10k"
 
-    subprocess.run(["git","clone","--depth=1","https://github.com/romkatv/powerlevel10k.git", "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"])
+    # install oh-my-zsh (non-interactive)
+    subprocess.run([
+        "sh", "-c",
+        "RUNZSH=no CHSH=no "
+        "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
+        ], check=True)
+
+    # install powerlevel10k
+    if not os.path.exists(p10k):
+        subprocess.run([
+            "git", "clone", "--depth=1",
+            "https://github.com/romkatv/powerlevel10k.git",
+            p10k
+            ], check=True)
+
 
 
 def main():
@@ -93,7 +108,7 @@ def main():
     dotfilesIncludedFiles = [".zshrc",".config/gtk-3.0",".config/gtk-4.0",".config/hypr",".config/kitty",".config/nwg-look",".config/qt5ct",".config/qt6ct",".config/rofi",".config/swaync",".config/waybar",".config/xdg-desktop-portal"]
     backupFileFolders(home_dir,dotfilesIncludedFiles)
     createSymlink(home_dir,dotfilesIncludedFiles)
-    setUpNormalStuff()
+    setUpNormalStuff(home_dir)
 
 if __name__=="__main__":
     main()
