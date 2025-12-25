@@ -1,0 +1,161 @@
+/* This is universal selector */
+* {
+
+    border: none;
+    border-radius:0px;
+
+    font-family: "Adwaita Sans","JetBrainsMono Nerd Font Propo", sans-serif;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+/* waybar*/
+window#waybar{
+    background:transparent;
+}
+
+tooltip{
+    background: #282c34;
+    border: 1px solid #3e4451;
+    border-radius: 12px; /* for very single module*/
+}
+tooltip label{
+    color: #abb2bf;
+    padding: 6px;
+}
+
+/* Workspaces*/
+#workspaces{
+
+    background-color: #282c34;
+    padding: 5px 3px; /* top,bottom = 5px and left, right = 3px*/
+    margin: 0 0 0 12px;
+    border-radius: 16px;
+    border: 1px solid #21252b;
+    color: #abb2bf;
+}
+
+#workspaces button{
+    padding: 0px 6px;
+    margin: 0px 3px;
+    border-radius: 50px;
+    color: transparent;
+    background-color: #21252b;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active{
+    background-color: #e03fd3;
+    color: #282c34;
+    min-width: 50px;
+    transition: all 0.3s ease-in-out;
+    font-size:13px;
+}
+#workspaces button.inactive{
+    color:#c678dd;
+}
+ 
+#workspaces button:hover{
+    background-color: #61afef;
+    color: #282c34;
+    border-radius:16px;
+    min-width:50px;
+    background-size: 400% 400%;
+}
+
+#workspaces button.urgent{
+    background-color:#e08c75; /*red*/
+    color:#282c34;
+    border-radius:16px;
+    min-width:50px;
+    background-size: 400% 400%;
+}
+
+/* for selected things*/
+
+#battery,
+#clock,
+#backlight,
+#network,
+#tray,
+#pulseaudio,
+#custom-cava,
+#custom-notification{
+
+    transition: all 1s ease;
+    background-color: #282c34;
+    padding: 0px 12px;
+    margin: 0 0 0 3px; /* this separates the modules from each other*/
+    border-radius: 50px
+}
+
+#clock{
+    color:#61afef; /*blue*/
+}
+#custom-cava{
+    color:#d4d65a;
+}
+
+#backlight{
+    color:#6ac248;
+}
+
+#custom-notification{
+    color:#c678dd; /*purple*/
+}
+#battery{
+    color:#56b6c2; /* aqua*/
+}
+#pulseaudio{
+    color:#abb2bf;/* foreground*/
+}
+#tray{
+    color:#98c379;
+}
+#network{
+    color:#98c379;
+}
+
+
+
+/* Hover here */
+#backlight:hover{
+    background-color:#130f17;
+    color:#3ed404;
+
+}
+#clock:hover{
+    background-color:#190f24;
+    color: #0045a1;
+}
+
+#custom-cava:hover{
+    background-color: #130f17;
+    color:#dbde09;
+}
+#custom-notification:hover{
+    background-color: #130f17;
+    color:#8c0bb3;
+}
+#pulseaudio:hover{
+    color:#4b5263;
+    background-color: #130f17;
+
+}
+#battery:hover{
+
+    color:#0596a8;
+    background-color: #130f17;
+}
+#tray:hover{
+    background-color: #130f17;
+}
+#network:hover {
+    background-color: #130f17;
+    color: #58962a;
+    box-shadow: 0 4px 15px rgba(124, 92, 255, 0.3);
+}
