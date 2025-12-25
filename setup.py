@@ -81,12 +81,16 @@ def setUpNormalStuff() -> None:
     subprocess.run(["systemctl","--user","restart","xdg-desktop-portal"],check=True)
     subprocess.run(["gsettings","set","org.gnome.desktop.interface","color-scheme","prefer-dark"])
 
+    subprocess.run(["sh","-c","$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ])
+
+    subprocess.run(["git","clone","--depth=1","https://github.com/romkatv/powerlevel10k.git", "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"])
+
 
 def main():
     neededPackages = ["wl-copy","pavucontrol","cava","swww","rofi","zsh","swaync","waybar","nwg-theme","xdg-desktop-portal-gtk","xdg-portal-hyprland","adw-gtk-dark","qt5ct","qt6ct","grim","slurp","kitty","thunar","wpctl","brightnessctl","network-manager-applet","zoxide","exa","gammastep","tealdeer","noto-fonts-emoji","ttf-jetbrains-mono-nerd","libcanberra","camera-shutter"]
     installNeededPackages(neededPackages)
 
-    dotfilesIncludedFiles = [".zshrc",".oh-my-zsh",".config/gtk-3.0",".config/gtk-4.0",".config/hypr",".config/kitty",".config/nwg-look",".config/qt5ct",".config/qt6ct",".config/rofi",".config/swaync",".config/waybar",".config/xdg-desktop-portal"]
+    dotfilesIncludedFiles = [".zshrc",".config/gtk-3.0",".config/gtk-4.0",".config/hypr",".config/kitty",".config/nwg-look",".config/qt5ct",".config/qt6ct",".config/rofi",".config/swaync",".config/waybar",".config/xdg-desktop-portal"]
     backupFileFolders(home_dir,dotfilesIncludedFiles)
     createSymlink(home_dir,dotfilesIncludedFiles)
     setUpNormalStuff()
