@@ -77,8 +77,8 @@ def createSymlink(home_dir,pathList:list) -> None:
 
 def setUpNormalStuff(home_dir) -> None:
     # this will make sure you gtk theme will be applied all over the apps
-    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal-hyprland"],check=True)
-    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal"],check=True)
+    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal-hyprland"])
+    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal"])
     subprocess.run(["gsettings","set","org.gnome.desktop.interface","color-scheme","prefer-dark"])
 
 
@@ -87,21 +87,18 @@ def setUpNormalStuff(home_dir) -> None:
     p10k_dir = os.path.join(zsh_custom, "themes", "powerlevel10k")
 
     # 1. Remove existing .oh-my-zsh if it exists
-    if os.path.exists(ohmyzsh_dir):
-        print("Removing existing .oh-my-zsh...")
-        shutil.rmtree(ohmyzsh_dir)
-
-    # 2. Install Oh My Zsh (non-interactive)
-    print("Installing Oh My Zsh...")
-    subprocess.run(
-            [
-                "sh",
-                "-c",
-                "RUNZSH=no CHSH=no "
-                "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
-                ],
-            check=True
-            )
+    if not os.path.exists(ohmyzsh_dir):
+        # 2. Install Oh My Zsh (non-interactive)
+        print("Installing Oh My Zsh...")
+        subprocess.run(
+                [
+                    "sh",
+                    "-c",
+                    "RUNZSH=no CHSH=no "
+                    "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
+                    ],
+                check=True
+                )
 
     # 3. Install Powerlevel10k
     if not os.path.exists(p10k_dir):
@@ -116,13 +113,6 @@ def setUpNormalStuff(home_dir) -> None:
                     ],
                 check=True
                 )
-
-    # 4. Run your other script
-    print("Running post-install script...")
-    subprocess.run(
-            ["sh", "path/to/your/other_script.sh"],
-            check=True
-            )
 
     print("Zsh setup complete.")
 
