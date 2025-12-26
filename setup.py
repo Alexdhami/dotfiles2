@@ -95,6 +95,21 @@ def setUpNormalStuff(home_dir:str) -> None:
                     ],
                 check=True
                 )
+    #2. Install zsh-autosuggestion
+    autosuggestionDir = os.path.join(ohmyzsh_dir,"plugins","zsh-autosuggestion")
+
+    if not os.path.exists(autosuggestionDir):
+        print("Installing zsh-autosuggestions")
+
+        subprocess.run(
+                [
+                    "git",
+                    "clone",
+                    "https://github.com/zsh-users/zsh-autosuggestions.git",
+                    autosuggestionDir,
+                    ],
+                check=True
+                )
 
     # 3. Install Powerlevel10k
     if not os.path.exists(p10k_dir):
@@ -125,12 +140,13 @@ def setUpNormalStuff(home_dir:str) -> None:
 
 def main():
     neededPackages = ["wl-copy","pavucontrol","cava","swww","rofi","zsh","swaync","waybar","nwg-theme","xdg-desktop-portal-gtk","xdg-portal-hyprland","adw-gtk-dark","qt5ct","qt6ct","grim","slurp","kitty","thunar","wpctl","brightnessctl","network-manager-applet","zoxide","exa","gammastep","tealdeer","noto-fonts-emoji","ttf-jetbrains-mono-nerd","libcanberra","camera-shutter"]
-    installNeededPackages(neededPackages)
 
     dotfilesIncludedFiles = [".zshrc",".config/gtk-3.0",".config/gtk-4.0",".config/hypr",".config/kitty",".config/nwg-look",".config/qt5ct",".config/qt6ct",".config/rofi",".config/swaync",".config/waybar",".config/xdg-desktop-portal"]
-    backupFileFolders(home_dir,dotfilesIncludedFiles)
-    createSymlink(home_dir,dotfilesIncludedFiles)
+    # installNeededPackages(neededPackages)
+    # backupFileFolders(home_dir,dotfilesIncludedFiles)
+    # createSymlink(home_dir,dotfilesIncludedFiles)
     setUpNormalStuff(home_dir)
+
 
 if __name__=="__main__":
     main()
