@@ -48,7 +48,7 @@ def backupFileFolders(home_dir:str,pathList:list) -> None:
             print(f"backing up {src_path} to {dest_parent}")
             shutil.move(src_path,dest_parent)
 
-def createSymlink(home_dir,pathList:list) -> None:
+def createSymlink(home_dir:str,pathList:list) -> None:
     # remove path if already exists
     gitdir = "dotfiles2"
     for fileF in pathList:
@@ -75,12 +75,7 @@ def createSymlink(home_dir,pathList:list) -> None:
         print(f"symlinking {dotpath} -> {src_path}")
         subprocess.run(["ln","-s",dotpath,src_path])
 
-def setUpNormalStuff(home_dir) -> None:
-    # this will make sure you gtk theme will be applied all over the apps
-    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal-hyprland"])
-    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal"])
-    subprocess.run(["gsettings","set","org.gnome.desktop.interface","color-scheme","prefer-dark"])
-
+def setUpNormalStuff(home_dir:str) -> None:
 
     ohmyzsh_dir = os.path.join(home_dir, ".oh-my-zsh")
     zsh_custom = os.environ.get("ZSH_CUSTOM", f"{ohmyzsh_dir}/custom")
@@ -88,6 +83,7 @@ def setUpNormalStuff(home_dir) -> None:
 
     # 1. Remove existing .oh-my-zsh if it exists
     if not os.path.exists(ohmyzsh_dir):
+
         # 2. Install Oh My Zsh (non-interactive)
         print("Installing Oh My Zsh...")
         subprocess.run(
@@ -113,6 +109,15 @@ def setUpNormalStuff(home_dir) -> None:
                     ],
                 check=True
                 )
+
+    # If you havent done this please uncomment this, this will make sure you gtk theme will be applied all over the apps
+
+    '''
+    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal-hyprland"])
+    subprocess.run(["systemctl","--user","restart","xdg-desktop-portal"])
+    subprocess.run(["gsettings","set","org.gnome.desktop.interface","color-scheme","prefer-dark"])
+
+    '''
 
     print("Zsh setup complete.")
 
