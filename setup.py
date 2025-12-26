@@ -96,7 +96,7 @@ def setUpNormalStuff(home_dir:str) -> None:
                 check=True
                 )
     #2. Install zsh-autosuggestion
-    autosuggestionDir = os.path.join(ohmyzsh_dir,"plugins","zsh-autosuggestion")
+    autosuggestionDir = os.path.join(ohmyzsh_dir,"custom","plugins","zsh-autosuggestion")
 
     if not os.path.exists(autosuggestionDir):
         print("Installing zsh-autosuggestions")
@@ -105,6 +105,7 @@ def setUpNormalStuff(home_dir:str) -> None:
                 [
                     "git",
                     "clone",
+                    "--depth=1",
                     "https://github.com/zsh-users/zsh-autosuggestions.git",
                     autosuggestionDir,
                     ],
