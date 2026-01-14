@@ -114,6 +114,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=nvim 
+alias vi=nvim 
 alias l="exa -l -a"
 alias ls="exa -l"
 
