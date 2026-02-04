@@ -44,7 +44,6 @@ def main():
     word = selected_text()
     site = f"https://freedictionaryapi.com/api/v1/entries/en/{word}"
     json_format = fetch_word_in_site(site)
-    example = get_example(json_format)
     send_notification(word,word_meaning(json_format),json_format)
 
 if __name__=="__main__":
