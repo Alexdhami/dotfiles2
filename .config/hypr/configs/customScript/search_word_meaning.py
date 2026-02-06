@@ -4,7 +4,12 @@ import requests
 import subprocess
 
 def selected_text():
-    return subprocess.check_output(["wl-paste","--primary", "--no-newline"]).decode()
+    
+    try:
+        return subprocess.check_output(["wl-paste","--primary", "--no-newline"]).decode()
+
+    except subprocess.CalledProcessError:
+        return None
 
 def word_meaning(json_format):
     if json_format is None:
@@ -38,7 +43,10 @@ def fetch_word_in_site(site):
         return None
 
 def send_notification(word, meaning,json_format):
-    subprocess.run(["notify-send","-t", "15000",f"Word: {word}",f"\nmeaning -> {meaning} \n\n example -> {get_example(json_format)}"])
+    if word is None:
+        subprocess.run(["notify-send","-t", "15000","No word selected."])
+    else:
+        subprocess.run(["notify-send","-t", "15000",f"Word: {word}",f"\nmeaning -> {meaning} \n\n example -> {get_example(json_format)}"])
 
 def main():
     word = selected_text()
