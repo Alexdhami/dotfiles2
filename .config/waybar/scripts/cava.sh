@@ -13,6 +13,7 @@ config_file="/tmp/polybar_cava_config"
 cat > "$config_file" << 'EOF'
 [general]
 bars = 18
+framerate = 60
 
 [output]
 method = raw
