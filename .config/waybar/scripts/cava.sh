@@ -9,18 +9,7 @@ for ((i=0; i<${#bar}; i++)); do
 done
 
 # Write cava config
-config_file="/tmp/polybar_cava_config"
-cat > "$config_file" << 'EOF'
-[general]
-bars = 18
-framerate = 60
-
-[output]
-method = raw
-raw_target = /dev/stdout
-data_format = ascii
-ascii_max_range = 7
-EOF
+config_file="polybar_cava_config"
 
 # Use sed once in the pipeline instead of per-line
 cava -p "$config_file" | sed -u "$dict"
