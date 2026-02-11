@@ -11,10 +11,11 @@ fi
 # Check if it's an area screenshot (argument passed)
 if [ "$1" = "area" ]; then
     # Area selection screenshot
-    FILENAME="$SCREENSHOT_DIR/area_$(date +%Y-%m-%d_%H-%M-%S).png"
-    grim -g "$(slurp)" "$FILENAME" && wl-copy < "$FILENAME" && canberra-gtk-play -i camera-shutter
+    hyprshot  -o $SCREENSHOT_DIR -m region 
+    paplay /usr/share/sounds/freedesktop/stereo/camera-shutter.oga
+
 else
-    # Full screen screenshot
-    FILENAME="$SCREENSHOT_DIR/screen_$(date +%Y-%m-%d_%H-%M-%S).png"
-    grim "$FILENAME" && wl-copy < "$FILENAME" && canberra-gtk-play -i camera-shutter
+    # perticular application
+    hyprshot -o $SCREENSHOT_DIR -m window
+    paplay /usr/share/sounds/freedesktop/stereo/camera-shutter.oga
 fi
