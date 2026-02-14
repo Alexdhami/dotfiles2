@@ -10,7 +10,7 @@ def installNeededPackages(packagename:list) -> None:
 
     try:
         for package in packagename:
-            subprocess.run(["yay", "-S",package,"--needed"])
+            subprocess.run(["yay", "-S",package,"--needed","--noconfirm"])
         print("✅ Packages installed successfully")
 
     except:
@@ -140,7 +140,7 @@ def setUpNormalStuff(home_dir:str) -> None:
 
 
 def main():
-    neededPackages = ["libnotify","wl-copy","pavucontrol","cava","swww","rofi","zsh","swaync","waybar","nwg-theme","xdg-desktop-portal-gtk","xdg-portal-hyprland","adw-gtk-dark","qt5ct","qt6ct","hyprshot","kitty","thunar","wpctl","brightnessctl","network-manager-applet","zoxide","exa","gammastep","tealdeer","noto-fonts-emoji","ttf-jetbrains-mono-nerd","libcanberra","camera-shutter","jq","xclip"]
+    neededPackages = ["libnotify","wl-copy","pavucontrol","cava","swww","rofi","zsh","swaync","waybar","nwg-theme","xdg-desktop-portal-gtk","xdg-portal-hyprland","adw-gtk-dark","qt5ct","qt6ct","hyprshot","kitty","thunar","wpctl","brightnessctl","network-manager-applet","zoxide","exa","gammastep","tealdeer","noto-fonts-emoji","ttf-jetbrains-mono-nerd","libcanberra","camera-shutter","jq","xclip","mpvpaper"]
 
     dotfilesIncludedFiles = [".zshrc",".profile",".config/gtk-3.0",".config/gtk-4.0",".config/hypr",".config/kitty",".config/nwg-look",".config/qt5ct",".config/qt6ct",".config/rofi",".config/swaync",".config/waybar",".config/xdg-desktop-portal"]
     setUpNormalStuff(home_dir)
