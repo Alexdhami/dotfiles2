@@ -16,13 +16,14 @@ def changeWallpaper(WallpapersDir:str):
         subprocess.run(["notify-send",f"No path -> {WallpapersDir}"])
         return
 
-    random_wallpaper =  getRandomWallpaperDirName(WallpapersDir)
-    if random_wallpaper is None:
+    random_wallpaper_dir =  getRandomWallpaperDirName(WallpapersDir)
+    if random_wallpaper_dir is None:
         subprocess.run(["notify-send","No wallpapers Directory inside ",f"{WallpapersDir}/.."])
         return
 
-    imageList = [os.path.join(random_wallpaper,img) for img in os.listdir(random_wallpaper) if img.lower().endswith((".png",".jpg",".jpeg",".webp"))]
+    imageList = [os.path.join(random_wallpaper_dir,img) for img in os.listdir(random_wallpaper_dir) if img.lower().endswith((".png",".jpg",".jpeg",".webp"))]
     if not imageList:
+        print(random_wallpaper_dir)
         subprocess.run(["notify-send","no image found."])
         return
 
@@ -30,7 +31,7 @@ def changeWallpaper(WallpapersDir:str):
     transitions = ["fade","wipe","grow","center","outer","any"]
     randomTransition = random.choice(transitions)
     subprocess.run(["swww", "img","--transition-type",randomTransition,randomImg ])
-    return os.path.join(random_wallpaper, randomImg)
+    return os.path.join(random_wallpaper_dir, randomImg)
 
 def sendImageChangedNotification(imgNamePath) -> None:
     if imgNamePath:
@@ -38,7 +39,7 @@ def sendImageChangedNotification(imgNamePath) -> None:
 
 def main():
     home_dir = os.path.expanduser("~")
-    WallpapersDir = os.path.join(home_dir,"Pictures","Wallpapers")
+    WallpapersDir = os.path.join(home_dir,"Pictures","wallpapers")
     sendImageChangedNotification(changeWallpaper(WallpapersDir))
 
 if __name__=="__main__":
